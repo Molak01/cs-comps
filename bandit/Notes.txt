@@ -1,0 +1,163 @@
+Level 0
+
+Use ssh -p 2220 bandit0@bandit.labs.overthewire.org
+
+Then type in the password provided.
+
+Simple as that
+
+---------------------------------------------------------------------------------
+Level 1
+
+To open the readme file use the command cat, which reads files and outputs the result.
+
+input: cat readme
+then the password will pop up for the next level
+
+---------------------------------------------------------------------------------
+Level 2
+
+You need to specify that - is a file, otherwise cat - won't work as it's not recognized in cat's programming.
+To specify a file location put ./ before - so it would look like:
+
+cat ./-
+doing so will then give you the password to move on
+
+---------------------------------------------------------------------------------
+Level 3
+
+Similar to level 2, you need to once again use ./ to specify the file, but this time you also need to put the whole name in quotes. If you don't you'll only search for ./spaces which doesn't exist.
+
+cat ./'spaces in this filename'
+
+---------------------------------------------------------------------------------
+Level 4
+
+The next one is hidden in the inhere directory, but not really that well. First use the cd command to enter the inhere directory
+
+cd inhere
+
+Next you need to use ls to list all items in the directory, but  you need to add on the additional -al command. THis will force the output to be in long format as well as show any files that were marked as hidden.
+
+ls -al
+
+after that use cat on the hidden file name and you should be good to go!
+
+---------------------------------------------------------------------------------
+Level 5
+
+I'll be honest, my first instinct was to go through each file 1 by 1 until I found the right one. That works, but obviously not the goal here. So after reading through the command manual for find I found a method of doing so by filtering out file type.
+The file command, when used on a file tells you what type it is:
+
+file ./[filename]
+
+
+By doing this you can narrow down what each file is without having to open them, allowing you to much faster find the correct file (should be ASCII text file).
+
+cat  ./[filename]
+
+---------------------------------------------------------------------------------
+Level 6
+
+For this level you need to now use the find command and the size of the file to find your answer. First cd into inhere like before, and don't worry about all the folders since we'll search them with the find command. Now you'll need to use this command, and I'll explain each part.
+
+find . -type f -size 1033c
+
+ '.' specifies to do the search within the directory we're in. '-type f' specifies to the find command that what we're looking for is a file then 'size 1033c' adds on that we're looking for a file of size 1033 bytes, with bytes being represented as c.
+
+Once that's typed in, enter it and it should give you the right path to cat to to find the password.
+
+cat [file path]
+
+---------------------------------------------------------------------------------
+Level 7
+
+Similar to level 6 we will use the find command but instead change up the commands to fit the new criteria.
+
+find / -type f -user bandit7 -group bandit6 -size 33c
+
+Since we need to check the whole server and not just one directoy we need to use '/' instead of '.'. Next we add '-user' and '-group' to check for both the user and group owner, and we keep the size command from before but with only 33 bytes this time.
+
+What will get returned back are alot of folders denying you access, however among them is one path where it doesn't say 'permission denied' is where our password. Copy that file path into cat and you'll get the password.
+
+cat [file path]
+
+---------------------------------------------------------------------------------
+Level 8
+
+The simplest way to solve this is by using the grep command. grep prints any line in a file name or in a file itself that matches a given pattern. Since the password is nect to millionth, all we need to input is:
+
+grep millionth data.txt
+
+That should result in the password hidden in data.txt
+
+---------------------------------------------------------------------------------
+level 9
+
+As the level suggested you will need a pipeline to help you find the password here, but first let's go through the command.
+
+sort data.txt | uniq -c
+
+The '|' is what indicates the pipe, and what it does is it's telling the system to use the sorted data.txt we get from the command 'sort data.txt' and run uniq -c on it. uniq filters each line so only the non repeated lines are printed to screen, and the additional -c gives us the count for how many times the line is found in the file. Since the password is on a file that's only repeated once, we find the line that has the count number 1, and that should be the password.
+
+---------------------------------------------------------------------------------
+Level 10
+
+We need a pipeline again, but instead we'll use the strings command which finds printable strings in a file.
+
+strings data.txt | grep =
+
+We use a pipe again, and then use grep like we did back in level 8 to single out the line with '='.
+
+It'll give a few different lines but the one we're looking for will have a password that looks similar to the ones we've had before. That should be the answer.
+
+---------------------------------------------------------------------------------
+Level 11
+
+This one is simple, the line is encoded in base64, so first go online and find a site that decodes base64. Then use cat like we've done before on data.txt, and copy the output from there into the decoder site. That should get you the password!
+
+---------------------------------------------------------------------------------
+Level 12
+
+Same as 11! Only this time, go to rot13.com. Repeat the same steps as from level 11.
+
+---------------------------------------------------------------------------------
+Level 13
+
+xxd -r data.txt > password
+
+file password
+
+mv password ans.gz
+
+gzip -d ans.gz
+
+mv ans password.bz
+
+bzip2 -d password.bz
+
+mv password password.gz
+
+gzip -d password.gz
+
+mv password password.tar
+
+tar xf password.tar
+
+mv data5.bin pass.tar
+
+tar xf pass.tar
+
+mv data6.bin pass.tar
+
+tar xf pass.tar
+
+mv data8.bin pass.gz
+
+gzip -d pass.gz
+
+and FINALLY: cat data.txt
+
+wtf
+---------------------------------------------------------------------------------
+JVNBBFSmZwKKOP0XbFXOoW8chDz5yVRv
