@@ -1,4 +1,4 @@
-Level 0
+Level 0 = 
 
 Use ssh -p 2220 bandit0@bandit.labs.overthewire.org
 
@@ -7,7 +7,7 @@ Then type in the password provided.
 Simple as that
 
 ---------------------------------------------------------------------------------
-Level 1
+Level 1 = NH2SXQwcBdpmTEzi3bvBHMM9H66vVXjL
 
 To open the readme file use the command cat, which reads files and outputs the result.
 
@@ -15,7 +15,7 @@ input: cat readme
 then the password will pop up for the next level
 
 ---------------------------------------------------------------------------------
-Level 2
+Level 2 = rRGizSaX8Mk1RTb1CNQoXTcYZWU6lgzi
 
 You need to specify that - is a file, otherwise cat - won't work as it's not recognized in cat's programming.
 To specify a file location put ./ before - so it would look like:
@@ -24,14 +24,14 @@ cat ./-
 doing so will then give you the password to move on
 
 ---------------------------------------------------------------------------------
-Level 3
+Level 3 = aBZ0W5EmUfAf7kHTQeOwd8bauFJ2lAiG
 
 Similar to level 2, you need to once again use ./ to specify the file, but this time you also need to put the whole name in quotes. If you don't you'll only search for ./spaces which doesn't exist.
 
 cat ./'spaces in this filename'
 
 ---------------------------------------------------------------------------------
-Level 4
+Level 4 = 2EW7BBsr6aMMoJ2HjW067dm8EgX26xNe
 
 The next one is hidden in the inhere directory, but not really that well. First use the cd command to enter the inhere directory
 
@@ -44,12 +44,12 @@ ls -al
 after that use cat on the hidden file name and you should be good to go!
 
 ---------------------------------------------------------------------------------
-Level 5
+Level 5 = lrIWWI6bB37kxfiCQZqUdOIYfr6eEeqR
 
 I'll be honest, my first instinct was to go through each file 1 by 1 until I found the right one. That works, but obviously not the goal here. So after reading through the command manual for find I found a method of doing so by filtering out file type.
 The file command, when used on a file tells you what type it is:
 
-file ./[filename]
+file ./*
 
 
 By doing this you can narrow down what each file is without having to open them, allowing you to much faster find the correct file (should be ASCII text file).
@@ -57,7 +57,7 @@ By doing this you can narrow down what each file is without having to open them,
 cat  ./[filename]
 
 ---------------------------------------------------------------------------------
-Level 6
+Level 6 = P4L4vucdmLnm8I7Vl7jG1ApGSfjYKqJU
 
 For this level you need to now use the find command and the size of the file to find your answer. First cd into inhere like before, and don't worry about all the folders since we'll search them with the find command. Now you'll need to use this command, and I'll explain each part.
 
@@ -70,7 +70,7 @@ Once that's typed in, enter it and it should give you the right path to cat to t
 cat [file path]
 
 ---------------------------------------------------------------------------------
-Level 7
+Level 7 = z7WtoNQU2XfjmMtWA8u5rN4vzqu4v99S
 
 Similar to level 6 we will use the find command but instead change up the commands to fit the new criteria.
 
@@ -83,7 +83,7 @@ What will get returned back are alot of folders denying you access, however amon
 cat [file path]
 
 ---------------------------------------------------------------------------------
-Level 8
+Level 8 = TESKZC0XvTetK0S9xNwm25STk5iWrBvP
 
 The simplest way to solve this is by using the grep command. grep prints any line in a file name or in a file itself that matches a given pattern. Since the password is nect to millionth, all we need to input is:
 
@@ -92,7 +92,7 @@ grep millionth data.txt
 That should result in the password hidden in data.txt
 
 ---------------------------------------------------------------------------------
-level 9
+level 9 = EN632PlfYiZbn3PhVK3XOGSlNInNE00t
 
 As the level suggested you will need a pipeline to help you find the password here, but first let's go through the command.
 
@@ -101,7 +101,7 @@ sort data.txt | uniq -c
 The '|' is what indicates the pipe, and what it does is it's telling the system to use the sorted data.txt we get from the command 'sort data.txt' and run uniq -c on it. uniq filters each line so only the non repeated lines are printed to screen, and the additional -c gives us the count for how many times the line is found in the file. Since the password is on a file that's only repeated once, we find the line that has the count number 1, and that should be the password.
 
 ---------------------------------------------------------------------------------
-Level 10
+Level 10 = G7w8LIi6J3kTb8A7j9LgrywtEUlyyp6s
 
 We need a pipeline again, but instead we'll use the strings command which finds printable strings in a file.
 
@@ -112,17 +112,17 @@ We use a pipe again, and then use grep like we did back in level 8 to single out
 It'll give a few different lines but the one we're looking for will have a password that looks similar to the ones we've had before. That should be the answer.
 
 ---------------------------------------------------------------------------------
-Level 11
+Level 11 = 6zPeziLdR2RKNdNYFNb6nVCKzphlXHBM
 
 This one is simple, the line is encoded in base64, so first go online and find a site that decodes base64. Then use cat like we've done before on data.txt, and copy the output from there into the decoder site. That should get you the password!
 
 ---------------------------------------------------------------------------------
-Level 12
+Level 12 = JVNBBFSmZwKKOP0XbFXOoW8chDz5yVRv
 
 Same as 11! Only this time, go to rot13.com. Repeat the same steps as from level 11.
 
 ---------------------------------------------------------------------------------
-Level 13
+Level 13 = wbWdlBxEir4CaE8LaPhauuOo6pwRmrDw
 
 xxd -r data.txt > password
 
@@ -160,4 +160,131 @@ and FINALLY: cat data.txt
 
 wtf
 ---------------------------------------------------------------------------------
-JVNBBFSmZwKKOP0XbFXOoW8chDz5yVRv
+Level 14 = fGrHPx402xGC7U7rXKDaxiWFTOiF0ENq
+
+For this level, you don't need a password, instead you connect to 14 b7 inputting the ssh key provided. In order to use this key without reading it, we need to use -i after ssh, which will read the key for us as it executes its function.
+
+ssh -i sshkey.private -p 2220 bandit14@bandit.labs.overthewire.org
+
+---------------------------------------------------------------------------------
+Level 15 = jN2kgmIXJ6fShzhT2avhotn4Zcka6tnt
+
+Since the password is on local host, and we need to input a password to get it It's best to use the nc command. nc lets us read or write over a network connection, so we can connect and input the password like this:
+
+nc localhost 30000
+
+Next press enter, and now input the password from the last level. YOu should get the level 15 password in return.
+
+---------------------------------------------------------------------------------
+Level 16 = JQttfApK4SeyHwDlI9SXGR50qclOAil1
+
+Like before we need to connect to the local host, only this time using SSL. In order to do so we need to, obviously, use the openssl command to connect using SSL. Then s_client to connect to the client.
+
+openssl s_client -connect localhost:30001
+
+Once it connects input the password from level 15, and you got it!
+
+---------------------------------------------------------------------------------
+Level 17 = Follow the whole guide
+
+We need to now use nmap, which will scan all the ports chosen on the given host. For this we need specifically 31000-32000. Also add -sV, to scan them for their services and what they offer to know which is SSL compatible
+
+nmap -p 31000-32000 -sV localhost
+
+Of the options at least one should say SSL, go to the one that doesn't say it's an echoe and connect to it like you did in the last level.
+
+openssl s_client -connect localhost:31790
+
+Input level 16 paassword
+
+Now we get the RSA Private Key and we need to take that, create a file for it and use it to connect to the next level(similar to level 14)
+
+Using vim: vim private(Private is a placeholder for any file you can make)
+(Copy Paste RSA KEY)
+
+ssh -i private -p 2220 bandit17@bandit.labs.overthewire.org
+
+---------------------------------------------------------------------------------
+Level 18 = hga5tuuCLF6fFzUpnagiMN8ssu9LFrdg
+
+Okay this one is much easier! To find the difference in the two files we can use the diff command to easily find the changed line!
+
+diff passwords.new passwords.old
+
+Simple as that! Make sure to use the password that popped up first.
+
+---------------------------------------------------------------------------------
+Level 19 = awhqfNnAbc1naukrpqDYcF95h7HoMTrC
+
+This one was a doozie. Apparently, we can also use SSh to issue commands to remote connections, not just connect to them. Which means we can just put our command for reading the readme file at the end of our typical connection method.
+
+ssh -p 2220 bandit18@bandit.labs.overthewire.org cat readme
+
+Log in again and the password should pop up.
+
+---------------------------------------------------------------------------------
+Level 20 = VxCazJaVykI6W36BkBU0mJTCM8rR95XT
+
+For this one we now need to mess with permissions, so first let's see what is owned by who (spoiler, it's bandit20)
+
+ls -la
+
+So now that we know bandit20 is allowed to execute commands here but now bandit 19, we need to execute commands AS bandit 20!
+
+./bandit20-do cat /etc/bandit_pass/bandit20
+
+we placed bandit20 at the end because that's the level we need the password for.
+
+---------------------------------------------------------------------------------
+Level 21 = NvEJF7oVjkddltPSrdKEFOllh9V1IBcq
+
+Alright so we're going to use a pipeline again, but as the task implied we need to send our old password through to a server we make in order to compare it with the bandit one. So we need to use the echo command which will let us our password to a server we make using nc.
+
+echo -n '[Level 20 Password]' | nc -l -p 7843 &
+
+To explain the flags, -n is to make it so there isn't a newline character (took me 15 minutes to figure out it was there) in the password we send, -l is to make our server actively listen for input, -p is for the port (I just picked random 4 numbers), and & tells the server to keep running in the background. Now that it's all set up, we can connect to it and get our password.
+
+./suconnect 7834
+
+---------------------------------------------------------------------------------
+Level 22 = WdDozAdTM2z9DiFEQ2mGlwngMfj4EZff
+
+As the level reccomends let's first go into the folder with the cronjobs.
+
+cd /etc/cron.d/
+
+Now we can take a look at what's going on using ls, like we did in previous levels
+
+ls -la
+
+Since we need the level 22 password, we should use cat on cronjob bandit 22
+
+cat cronjob_bandit22
+
+cat /usr/bin/cronjob_bandit22.sh
+
+Now we can see that this process is making a file within the tmp folder, so logically we should go back out of etc and use cat on this file to see what's going on.
+
+cat /tmp/
+
+There's the password!
+
+---------------------------------------------------------------------------------
+Level 23 = QYw0Y2aiA672PsMmh9puTQuhoz8SyR2G
+
+This starts very similar to level 22 so follow the level 22 guide unil you do this command:
+
+cat /usr/bin/cronjob_bandit23.sh
+
+Now it has variables called "myname" and "mytarget". "myname" is, obviously bandit23 and "mytarget" is going to be the name of the file in the tmp folder that has the outputted password. So now we just run the command for mytarget while substituting "myname" with bandit23.
+
+echo I am user bandit23 | md5sum | cut -d ' ' -f 1
+
+cat /tmp/8ca319486bfbbc3663ea0fbe81326349
+
+There's the password!
+
+---------------------------------------------------------------------------------
+Level 24 =
+
+Similar start to level 22, do that guide until you use cat on the .sh file.
