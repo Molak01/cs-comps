@@ -1,0 +1,46 @@
+Level 0: natas0
+
+Very straightforward, open the site in a new tab and then input the given username and password.
+
+-------------------------------------------------------------------
+Level 0 -> 1: g9D9cREhslqBKtcA2uocGHPfMZVzeFK6
+
+For this one, it says the password was on the page and can be found. The first thought that came to mind was to check the page code, and you can do so by right clicking the page and then inspecting source. After looking through it all, you can find the password located in the body of the page in a subheader labeled "content"
+
+-------------------------------------------------------------------
+Level 1 -> 2: h4ubbcXrWqsTo7GGnnUMLppXbOogfBZ7
+
+Thanks to the lab we had in class, I knew that I would have to use curl in some fashion so I had to see what it can do. Turns out it has a flag called -u, doing this followed by you're username and password will allow you to curl sites that require logins. So open your terminal, and run this command:
+
+curl http://natas1.natas.labs.overthewire.org -u natas1:g9D9cREhslqBKtcA2uocGHPfMZVzeFK6
+
+The password should then be available below.
+
+-------------------------------------------------------------------
+Level 2 -> 3: G6ctbMJ5Nb4cbFwhpMPSvxGHhQ7I6W8Q
+
+It claims there's nothing on the page, but there was a single, molecular, pixel.png that you can find if you inspect the page source. Rather than downloading the png and seeing if there's any data hidden in it (like I did), you'll notice after an hour of trying to translate an image that page to the png is http://natas2.natas.labs.overthewire.org/files/pixel.png. So now we know there's another page called http://natas2.natas.labs.overthewire.org/files.
+
+Let's go there in a web browser, and now you see a txt file called users.txt. Click it and you'll have you're password.
+-------------------------------------------------------------------
+Level 3 -> 4:tKOcJIbzM4lTs8hbCmzn5Zr4434fGZQm
+
+Alright this one hurt me alot. Once again it says there's nothing on the page, so go and inspect that page source. There it says "No more data leaks! Not even google will find it this time...". So my first logical thought was to try and use google and input the website linke, didn't work. Then I googled "How to hide websites from google" which went down an even deep rabbit hole than in the previous level. So then I changed my prompt to "What keeps websites hidden from google?" and after some reading I found out some sites have a robots.txt file that can keep then from being called on by google.
+
+So let's go to natas3's robots.txt
+
+http://natas3.natas.labs.overthewire.org/robots.txt
+
+When we get there we see a line that states Disallow: /s3cr3t/, gee I wonder what that is? Put it in the link:
+
+http://natas3.natas.labs.overthewire.org/s3cr3t/
+
+There we find another users.txt, and from there we can get our password.
+
+-------------------------------------------------------------------
+Level 4 -> 5: 
+
+For this one it can only be accessed by level 5, but it does so by checking the link of the site being used to connect. So what we have to do is somehow change the site refferal, which then also means changing something in the HTTP packet. So after some research https://security.stackexchange.com/questions/27906/playing-with-referer-header
+I found an app I can use to do so called Ref Control which would allow me to change the site Referer.
+SO first I redownloaded Firefox, installed the app. and then went to natas4 and manually changed the HTTP, giving me the password.
+
