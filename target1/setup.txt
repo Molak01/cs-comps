@@ -1,0 +1,20 @@
+For setting up our VM, we ran into some roadblocks using the flash drive provided to us by Mike Tie, and in the end, we all ended up using a version of Ariana's VM it ain't pretty, but it allowed us to get to work.
+
+Here are the steps we took to build the actual machine:
+
+1. First we did a lot of brainstorming and originally settled on having a form of parameter pollution to gain admin access to a website be the main vulnerability of our website.
+
+2. Our version of parameter pollution required us to make a basic login page with authentication and also 2 more sites that a basic user would have access to, and then an exclusive admin page.
+
+So now let's break it down:
+	- Using HTML, create a basic login page that requires a username and password, then connect said page to a PHP script that takes users who sign in to a landing page.
+	- In the PHP script make sure you use the header function to add the header "account-type" in the parameters for the site, and since they log in as a guest it will be guest to start with.
+	- Have it so that the user can see there is an extra detail in the header called "account-type" and this is what needs to be changed in order for them to gain access to the admin page.
+	- So ideally, they've realized that they can go back to the login page, and log in, but this time change the header to what they found in the about page (In the about HTML page, the admin is called the CEO, so they should think to change the account-type to CEO).
+	- Now this should take them to a basic page that allows them to run commands on the system, for this project we set it up to run simple commands.
+	- Now we're DON-.....wait, oh no, we couldn't figure out how to get the authentication to work properly and send the data to the site via the login page.
+	- Uh, uh, panic.
+	- Continue to internally panic as you work on Sunday night
+	- NEW LAST MINUTE PLAN by Ariana
+	- Instead of parameter pollution via header, we'd set up in php a new COOKIE that the user can alter from 'user' to 'CEO' and then by reloading the pages would grant them access to the admin page.
+	- WELL DONE, we've now made a half-baked virtual machine in the span of one weekend.

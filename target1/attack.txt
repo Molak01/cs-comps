@@ -1,0 +1,11 @@
+For a long while I was struggling to get the VM of Kiyr's team to run on my Windows laptop, so instead I had to use one of the virtual machines in the computer lab to get it working. Here are the steps I took in order to attack the machine:
+
+1. First, download and run the VM following the instructions provided
+2. Connect to that VM by opening the computer's own Kali and utilizing the command prompt on Ubuntu
+3. I finally get it to work and now I take the IP address, given to me by VMware in the settings area, and put it in my web browser
+4. Says the page doesn't exist
+5. Ok...., instead I'll use the terminal and run ls, let's see what's on the server.
+	- hello.txt, just says hello
+	- Uh.., ok any php? let's look for php
+6. Found hello.php! Alright, let's use what Jeff gave me and try making a reverse webshell
+7. Holy shit it worked, I'm in.
